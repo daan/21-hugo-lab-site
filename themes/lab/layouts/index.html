@@ -1,0 +1,10 @@
+{{ define "header" }}{{ partial "page-header.html" . }}{{ end }}
+{{ define "main" }}
+<main aria-role="main">
+  <div class="container-fluid lab-border-dash-bottom px-4 ">
+  <h1>{{.Title}}</h1>
+  {{.Content}}
+</div>
+
+</main>
+{{ end }}

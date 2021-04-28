@@ -1,0 +1,33 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Hugo for Lab"
+theme = "lab"
+[menu]
+  [[menu.nav]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.nav]]
+    name = "Markdown"
+    url = "/markdown/"
+    weight = 2
+  [[menu.nav]]
+    name = "Media"
+    url = "/media/"
+    weight = 3
+  [[menu.nav]]
+    name = "Dropdown"
+    url = "#"
+    weight = 4
+  [[menu.nav]]
+    name = "option 1"
+    url = "#"
+    weight = 1
+    parent = "Dropdown"
+  [[menu.nav]]
+    name = "option 2"
+    url = "#"
+    weight = 2
+    parent = "Dropdown"
+
+

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid  px-4 lab-border-dash-bottom ">
+        <a class="navbar-brand" href="/">Hugo Lab Theme</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            {{ $currentPage := . -}}
+            {{ range .Site.Menus.nav -}}
+              {{ $active := "" -}}
+              {{ $ariaCurrent := "" -}}
+              {{ $dropDown := "" -}}
+              {{ $dropDownToggle := "" -}}
+              {{ $dropDownToggleButton := "" -}}
+
+              {{ $isMenu := or ($currentPage.IsMenuCurrent "nav" .) ($currentPage.HasMenuCurrent "nav" .) -}}
+              {{ $isMenu = or $isMenu (eq $currentPage.Params.identifier .Identifier) -}}
+              {{ $isMenu = or $isMenu (eq $currentPage.Title .Name) -}}
+              {{ if $isMenu -}} 
+                {{ $active = " active" -}}
+                {{ $ariaCurrent = "aria-current=\"page\" " -}}
+              {{ end -}}              
+              {{ if .HasChildren -}}
+                {{ $dropDown = " dropdown"}}
+                {{ $dropDownToggle = " dropdown-toggle"}}
+                {{ $dropDownToggleButton = "role=\"button\" data-bs-toggle=\"dropdown\" "}}                
+              {{ end -}}
+              <li class="nav-item{{ $dropDown }}">                  
+              <a class="nav-link{{ $active }}{{ $dropDownToggle }}" {{ print $dropDownToggleButton | safeHTMLAttr }}{{ print $ariaCurrent | safeHTMLAttr }}href="{{ .URL }}">{{ print .Name | safeHTML }}</a>
+              {{ if .HasChildren }}
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+              {{ range .Children -}}
+                 <li><a class="dropdown-item" href="#">{{ .Name }}</a></li>
+              {{ end -}}
+              </ul>
+              {{ end -}}
+              </li>
+            {{ end -}}
+            </ul>
+        </div>
+      </div>
+</nav>
